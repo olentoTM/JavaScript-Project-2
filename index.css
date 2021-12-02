@@ -94,9 +94,34 @@ body, html {
     background-color: black;
     color: white;
     border-radius: 20px;
+    padding: 10px;
 }
 
 .usrinfotext {
     margin: 0px;
     padding: 0px;
 }
+
+.listimg1 {
+    width: 20%;
+}
+
+.listimg {
+    width: 15%;
+    transition: transform .2s;
+    vertical-align: middle;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+}
+
+.listtxt {
+    margin-left: 10px;
+}
+
+/* .listimg:hover {
+    transform: scale(2);
+} */
