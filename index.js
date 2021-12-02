@@ -10,6 +10,7 @@ var playcount = document.getElementById("playcount");
 var realname = document.getElementById("realname");
 var country = document.getElementById("country");
 var imglink = document.getElementById("imglink");
+var tracks = document.getElementById("tracks");
 
 //Hakupainiketta painamalla suoritetaan getInfo() funktio.
 document.getElementById("button-addon2").addEventListener("click", getInfo);
@@ -28,11 +29,15 @@ function getInfo() {
         alert("Please enter a username first!");
     }
     else {
-        usrInput.value = "";
-        
         //Pistetään tarvittavat osoitteet muuttujiin. Haettavan käyttäjän nimi tulee teksti kentästä.
         var url1 = "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
         var url2 = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=5&extended=1&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+        var url3 = "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists&limit=1&user=" + usrInput +"&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+        var url4 = "https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&limit=1&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+        var url5 = "https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&limit=1&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+
+        //Nyt kun URL osoitteet on tallennettu muuttujiin, voimme tyhjentää tekstikentän.
+        document.getElementById("usrInput").value = "";
         
         //Tehdään niin monta HMLHttpRequestia, kuin osoitteita on. Tämän olisi varmaan voinut tehdä tehokkaammin vähemmällä koodilla, mutta minua juuri nyt kiinnostaa vain se, että koodi toimii.
         
@@ -89,20 +94,66 @@ function getInfo() {
             }
             if (this.readyState == 4 && this.status == 200) {
                 console.log("Recent tracks have been succesfully acquired!");
-                mySecondArray = JSON.parse(this.responseText);
+                var mySecondArray = JSON.parse(this.responseText);
                 myFunction2(mySecondArray);
             }
         };
         http2.open("GET", url2, true);
         http2.send();
+
+        //Erillinen XMLHttpRequesti kolmatta URL osoitetta varten.
+        var http3 = new XMLHttpRequest();
+        http3.onreadystatechange = function() {
+            
+            if(this.readyState == 1){
+                console.log("Getting top artist...");
+            }
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Top artist has been succesfully acquired!");
+                var myThirdArray = JSON.parse(this.responseText);
+                myFunction3(myThirdArray);
+            }
+        };
+        http3.open("GET", url3, true);
+        http3.send();
+
+        //Erillinen XMLHttpRequesti neljättä URL osoitetta varten.
+        var http4 = new XMLHttpRequest();
+        http4.onreadystatechange = function() {
+            
+            if(this.readyState == 1){
+                console.log("Getting top album...");
+            }
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Top album has been succesfully acquired!");
+                var myFourthArray = JSON.parse(this.responseText);
+                myFunction4(myFourthArray);
+            }
+        };
+        http4.open("GET", url4, true);
+        http4.send();
+        
+        //Erillinen XMLHttpRequesti viidettä URL osoitetta varten.
+        var http5 = new XMLHttpRequest();
+        http5.onreadystatechange = function() {
+            
+            if(this.readyState == 1){
+                console.log("Getting top artist...");
+            }
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Top track has been succesfully acquired!");
+                var myFifthArray = JSON.parse(this.responseText);
+                myFunction5(myFifthArray);
+            }
+        };
+        http5.open("GET", url5, true);
+        http5.send();
     }
 }
 
 function myFunction(myArray){
     
     //Täällä käsitellään ensimmäisestä pyynnöstä saadut tiedot, ja asetetaan ne oikeisiin paikkoihin sivulla.
-
-    load.style.display = "none";
     
     console.log(myArray);
 
@@ -114,6 +165,7 @@ function myFunction(myArray){
     country.innerHTML = "Country: " + myArray.user.country;
     playcount.innerHTML = "Total playcount: " + myArray.user.playcount;
 
+    load.style.display = "none";
     info.style.display = "block";
 }
 
@@ -126,12 +178,13 @@ function myFunction2(mySecondArray){
     document.getElementById("infobg").style.backgroundImage = "url(" + mySecondArray.recenttracks.track[0].image[3]["#text"] +")";
     
     //Pistetään kuvat listaan.
-    document.getElementById("listimg01").src = mySecondArray.recenttracks.track[0].image[3]["#text"];
-    document.getElementById("listimg02").src = mySecondArray.recenttracks.track[1].image[3]["#text"];
-    document.getElementById("listimg03").src = mySecondArray.recenttracks.track[2].image[3]["#text"];
-    document.getElementById("listimg04").src = mySecondArray.recenttracks.track[3].image[3]["#text"];
-    document.getElementById("listimg05").src = mySecondArray.recenttracks.track[4].image[3]["#text"];
+    document.getElementById("listimg01").src = mySecondArray.recenttracks.track[0].image[1]["#text"];
+    document.getElementById("listimg02").src = mySecondArray.recenttracks.track[1].image[1]["#text"];
+    document.getElementById("listimg03").src = mySecondArray.recenttracks.track[2].image[1]["#text"];
+    document.getElementById("listimg04").src = mySecondArray.recenttracks.track[3].image[1]["#text"];
+    document.getElementById("listimg05").src = mySecondArray.recenttracks.track[4].image[1]["#text"];
 
+    //Lisätään artisti ja kappaleen nimi listaan.
     document.getElementById("listtxt01").lastChild.textContent = mySecondArray.recenttracks.track[0].artist.name + " - " + mySecondArray.recenttracks.track[0].name;
     document.getElementById("listtxt02").lastChild.textContent = mySecondArray.recenttracks.track[1].artist.name + " - " + mySecondArray.recenttracks.track[1].name;
     document.getElementById("listtxt03").lastChild.textContent = mySecondArray.recenttracks.track[2].artist.name + " - " + mySecondArray.recenttracks.track[2].name;
@@ -139,7 +192,34 @@ function myFunction2(mySecondArray){
     document.getElementById("listtxt05").lastChild.textContent = mySecondArray.recenttracks.track[4].artist.name + " - " + mySecondArray.recenttracks.track[4].name;
 
     //Jos käyttäjä on hakuhetkellä kuuntelemassa (siis "scrobblaamassa") jotain, ilmestyy JSON objektiin "nowplaying" osuus. Jos tämä osuus on olemassa, näytetään haetun käyttäjän olevan aktiivisesti kuuntelemassa jotain.
-    if(typeof mySecondArray.recenttracks.track[0]["@attr"].nowplaying != "undefined"){
+    if(mySecondArray.recenttracks.track[0]["@attr"].nowplaying != "undefined"){
         document.getElementById("status").innerHTML = "<i class=\"fas fa-play\"></i> Now Playing:";
     }
+}
+
+function myFunction3(myThirdArray){
+    console.log(myThirdArray);
+
+    document.getElementById("favArtistImg").src = myThirdArray.topartists.artist[0].image[4]["#text"];
+    document.getElementById("favlink1").href = myThirdArray.topartists.artist[0].url;
+    document.getElementById("favArtistName").innerText = myThirdArray.topartists.artist[0].name;
+    document.getElementById("favArtistPlayCount").innerText = "Total Playcount: " + myThirdArray.topartists.artist[0].playcount;
+}
+
+function myFunction4(myFourthArray){
+    console.log(myFourthArray);
+
+    document.getElementById("favAlbumImg").src = myFourthArray.topalbums.album[0].image[3]["#text"];
+    document.getElementById("favlink2").href = myFourthArray.topalbums.album[0].url;
+    document.getElementById("favAlbumName").innerText = myFourthArray.topalbums.album[0].name + " by " + myFourthArray.topalbums.album[0].artist.name;
+    document.getElementById("favAlbumPlayCount").innerText = "Total Playcount: " + myFourthArray.topalbums.album[0].playcount;
+}
+
+function myFunction5(myFifthArray){
+    console.log(myFifthArray);
+
+    document.getElementById("favTrackImg").src = myFifthArray.toptracks.track[0].image[3]["#text"];
+    document.getElementById("favlink3").href = myFifthArray.toptracks.track[0].url;
+    document.getElementById("favTrackName").innerText = myFifthArray.toptracks.track[0].name + " by " + myFifthArray.toptracks.track[0].artist.name;
+    document.getElementById("favTrackPlayCount").innerText = "Total Playcount: " + myFifthArray.toptracks.track[0].playcount;
 }
