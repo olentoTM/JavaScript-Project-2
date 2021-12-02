@@ -23,8 +23,8 @@ function getInfo() {
     else {
         usrInput.value = "";
         
-        var url1 = "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
-        var url2 = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=5&extended=1&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+        var url1 = "https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
+        var url2 = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=5&extended=1&user=" + usrInput + "&api_key=4b8572f8c8b9752e97052ee0a2aec552&format=json";
 
         http.onreadystatechange = function() {
             
