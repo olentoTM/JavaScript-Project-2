@@ -165,6 +165,7 @@ function myFunction(myArray){
     country.innerHTML = "Country: " + myArray.user.country;
     playcount.innerHTML = "Total playcount: " + myArray.user.playcount;
 
+    //Tässä vaiheessa voimme piilottaa latausruudun ja esittää info ruutu.
     load.style.display = "none";
     info.style.display = "block";
 }
@@ -175,16 +176,17 @@ function myFunction2(mySecondArray){
     
     console.log(mySecondArray);
 
+    //Inforuutu saa taustakseen käyttäjän viimeisimmän kappaleen kuvan.
     document.getElementById("infobg").style.backgroundImage = "url(" + mySecondArray.recenttracks.track[0].image[3]["#text"] +")";
     
-    //Pistetään kuvat listaan.
+    //Pistetään kuvat listaan. Tämän olisi voinut tehdä For loopilla, mutta olin liian laiska siihen.
     document.getElementById("listimg01").src = mySecondArray.recenttracks.track[0].image[1]["#text"];
     document.getElementById("listimg02").src = mySecondArray.recenttracks.track[1].image[1]["#text"];
     document.getElementById("listimg03").src = mySecondArray.recenttracks.track[2].image[1]["#text"];
     document.getElementById("listimg04").src = mySecondArray.recenttracks.track[3].image[1]["#text"];
     document.getElementById("listimg05").src = mySecondArray.recenttracks.track[4].image[1]["#text"];
 
-    //Lisätään artisti ja kappaleen nimi listaan.
+    //Lisätään artisti ja kappaleen nimi listaan. Tämän olisi voinut tehdä For loopilla, mutta olin liian laiska siihen.
     document.getElementById("listtxt01").lastChild.textContent = mySecondArray.recenttracks.track[0].artist.name + " - " + mySecondArray.recenttracks.track[0].name;
     document.getElementById("listtxt02").lastChild.textContent = mySecondArray.recenttracks.track[1].artist.name + " - " + mySecondArray.recenttracks.track[1].name;
     document.getElementById("listtxt03").lastChild.textContent = mySecondArray.recenttracks.track[2].artist.name + " - " + mySecondArray.recenttracks.track[2].name;
@@ -198,8 +200,12 @@ function myFunction2(mySecondArray){
 }
 
 function myFunction3(myThirdArray){
+    
+    //Täällä käsitellään kolmannesta pyynnöstä saadut tiedot, ja ne asetetaan myös oikeisiin paikkoihin sivulla.
+    
     console.log(myThirdArray);
 
+    //Pistetään lempiartistin kuva, nimi ja toistojen määrä oikeisiin paikkoihin. Lisätään kuvaan myös linkki artistin Last.FM sivulle.
     document.getElementById("favArtistImg").src = myThirdArray.topartists.artist[0].image[4]["#text"];
     document.getElementById("favlink1").href = myThirdArray.topartists.artist[0].url;
     document.getElementById("favArtistName").innerText = myThirdArray.topartists.artist[0].name;
@@ -207,8 +213,12 @@ function myFunction3(myThirdArray){
 }
 
 function myFunction4(myFourthArray){
+    
+    //Täällä käsitellään neljännestä pyynnöstä saadut tiedot, ja ne asetetaan myös oikeisiin paikkoihin sivulla.
+    
     console.log(myFourthArray);
 
+    //Pistetään lempialbumin kuva, nimi ja toistojen määrä oikeisiin paikkoihin. Lisätään kuvaan myös linkki albumin Last.FM sivulle.
     document.getElementById("favAlbumImg").src = myFourthArray.topalbums.album[0].image[3]["#text"];
     document.getElementById("favlink2").href = myFourthArray.topalbums.album[0].url;
     document.getElementById("favAlbumName").innerText = myFourthArray.topalbums.album[0].name + " by " + myFourthArray.topalbums.album[0].artist.name;
@@ -216,8 +226,12 @@ function myFunction4(myFourthArray){
 }
 
 function myFunction5(myFifthArray){
+    
+    //Täällä käsitellään viidennestä pyynnöstä saadut tiedot, ja ne asetetaan myös oikeisiin paikkoihin sivulla.
+    
     console.log(myFifthArray);
 
+    //Pistetään lempikappaleen kuva, nimi ja toistojen määrä oikeisiin paikkoihin. Lisätään kuvaan myös linkki kappaleen Last.FM sivulle.
     document.getElementById("favTrackImg").src = myFifthArray.toptracks.track[0].image[3]["#text"];
     document.getElementById("favlink3").href = myFifthArray.toptracks.track[0].url;
     document.getElementById("favTrackName").innerText = myFifthArray.toptracks.track[0].name + " by " + myFifthArray.toptracks.track[0].artist.name;
