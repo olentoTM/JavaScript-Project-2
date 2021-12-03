@@ -203,7 +203,7 @@ function myFunction3(myThirdArray){
     document.getElementById("favArtistImg").src = myThirdArray.topartists.artist[0].image[4]["#text"];
     document.getElementById("favlink1").href = myThirdArray.topartists.artist[0].url;
     document.getElementById("favArtistName").innerText = myThirdArray.topartists.artist[0].name;
-    document.getElementById("favArtistPlayCount").innerText = "Total Playcount: " + myThirdArray.topartists.artist[0].playcount;
+    document.getElementById("favArtistPlayCount").innerText = "Playcount: " + myThirdArray.topartists.artist[0].playcount;
 }
 
 function myFunction4(myFourthArray){
@@ -212,7 +212,7 @@ function myFunction4(myFourthArray){
     document.getElementById("favAlbumImg").src = myFourthArray.topalbums.album[0].image[3]["#text"];
     document.getElementById("favlink2").href = myFourthArray.topalbums.album[0].url;
     document.getElementById("favAlbumName").innerText = myFourthArray.topalbums.album[0].name + " by " + myFourthArray.topalbums.album[0].artist.name;
-    document.getElementById("favAlbumPlayCount").innerText = "Total Playcount: " + myFourthArray.topalbums.album[0].playcount;
+    document.getElementById("favAlbumPlayCount").innerText = "Playcount: " + myFourthArray.topalbums.album[0].playcount;
 }
 
 function myFunction5(myFifthArray){
@@ -221,5 +221,5 @@ function myFunction5(myFifthArray){
     document.getElementById("favTrackImg").src = myFifthArray.toptracks.track[0].image[3]["#text"];
     document.getElementById("favlink3").href = myFifthArray.toptracks.track[0].url;
     document.getElementById("favTrackName").innerText = myFifthArray.toptracks.track[0].name + " by " + myFifthArray.toptracks.track[0].artist.name;
-    document.getElementById("favTrackPlayCount").innerText = "Total Playcount: " + myFifthArray.toptracks.track[0].playcount;
+    document.getElementById("favTrackPlayCount").innerText = "Playcount: " + myFifthArray.toptracks.track[0].playcount;
 }

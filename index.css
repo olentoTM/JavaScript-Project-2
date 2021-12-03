@@ -1,8 +1,9 @@
 body, html {
-    height: 125%;
+    min-height: 100%;
     background-image: linear-gradient(to top left, black, #E31B23);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-attachment: fixed;
+    position: relative;
 }
 
 .mainText {
@@ -65,7 +66,9 @@ body, html {
 }
 
 .info {
+    /* HUOM! backdrop-filter ei ole tuettu Firefox-selaimessa, joten tätä efektiä ei näy kun sivua katsoo sen kautta. */
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 20px;
     padding-left: 20px;
     padding-right: 20px;
@@ -77,20 +80,19 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 5px 5px 10px rgb(32, 32, 32);
-    border: 0px;
-    padding: 0px;
-    margin: 0px;
     border-radius: 20px;
+    margin-bottom: 20px;
     display: none;
 }
 
 .usrimg {
     width: 100%;
     border-radius: 50%;
+    margin-bottom: 20px;
 }
 
 .usrimg:hover {
-    border: 5px solid white;
+    border: 3px solid white;
 }
 .usrinfo {
     background-color: black;
@@ -132,10 +134,26 @@ body, html {
 }
 
 .favimg {
-    width: 100%;
+    width: 50%;
     margin-bottom: 10px;
+    align-items: center;
 }
 
+.favimg:hover {
+    border: 3px solid white;
+}
 .favcontainer {
     text-align: center;
+}
+
+.secondTitle {
+    text-align: center;
+}
+
+.fa-lastfm{
+    float: right;
+}
+
+.pageTitle {
+    margin-top: 10px;
 }
