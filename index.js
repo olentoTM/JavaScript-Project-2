@@ -194,8 +194,14 @@ function myFunction2(mySecondArray){
     document.getElementById("listtxt05").lastChild.textContent = mySecondArray.recenttracks.track[4].artist.name + " - " + mySecondArray.recenttracks.track[4].name;
 
     //Jos käyttäjä on hakuhetkellä kuuntelemassa (siis "scrobblaamassa") jotain, ilmestyy JSON objektiin "nowplaying" osuus. Jos tämä osuus on olemassa, näytetään haetun käyttäjän olevan aktiivisesti kuuntelemassa jotain.
-    if(mySecondArray.recenttracks.track[0]["@attr"].nowplaying != "undefined"){
+    
+    let obj = mySecondArray.recenttracks.track[0];
+    
+    if(obj.hasOwnProperty(["@attr"])){
         document.getElementById("status").innerHTML = "<i class=\"fas fa-play\"></i> Now Playing:";
+    }
+    else {
+        document.getElementById("status").innerHTML = "Last Track Played:";
     }
 }
 
